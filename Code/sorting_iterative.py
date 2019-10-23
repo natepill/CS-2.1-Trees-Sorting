@@ -41,7 +41,9 @@ def bubble_sort(items):
             #swap the values
         if items[index_1] > items[index_2]:
             temp  = items[index_1]
-            items[index_1] == 
+            items[index_1] = items[index_2]
+            items[index_2] = temp
+            
     # TODO: Repeat until all items are in sorted order
     # TODO: Swap adjacent items that are out of order
 
