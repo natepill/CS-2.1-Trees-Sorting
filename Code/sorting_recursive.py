@@ -6,6 +6,12 @@ def merge(items1, items2):
     and return a new list containing all items in sorted order.
     TODO: Running time: ??? Why and under what conditions?
     TODO: Memory usage: ??? Why and under what conditions?"""
+
+    # longer list becomes primary list to add to in order to minimize number of iterations
+    primary_list, secondary_list = (items1, items2) if len(items1) > len(items2) else (items2, items1)
+
+    for value in pri
+
     # TODO: Repeat until one list is empty
     # TODO: Find minimum item in both lists and append it to new list
     # TODO: Append remaining items in non-empty list to new list
