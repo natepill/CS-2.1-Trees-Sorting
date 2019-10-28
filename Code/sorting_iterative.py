@@ -162,4 +162,5 @@ if __name__ == "__main__":
     items = [1, 2, 3, 1, 2, 5]
     print(is_sorted(items))
     selection_sort(items)
+    print(is_sorted(items))
     print(items)
