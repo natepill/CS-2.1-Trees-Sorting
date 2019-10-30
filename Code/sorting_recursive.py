@@ -7,10 +7,35 @@ def merge(items1, items2):
     TODO: Running time: ??? Why and under what conditions?
     TODO: Memory usage: ??? Why and under what conditions?"""
 
+
+    merged_list = []
+
     # longer list becomes primary list to add to in order to minimize number of iterations
     primary_list, secondary_list = (items1, items2) if len(items1) > len(items2) else (items2, items1)
+    pl_index = 0
+    sl_index = 0
+    print(f"Primary List: {primary_list}")
+    print(f"Secondary List: {secondary_list}")
+    while sl_index < len(primary_list)-1:
+        print("Here")
+        if primary_list[pl_index] <= secondary_list[sl_index]:
+            merged_list.append(primary_list[pl_index])
+            pl_index += 1
+        else:
+            merged_list.append(secondary_list[sl_index])
+            sl_index += 1
 
-    for value in pri
+    return merged_list + primary_list
+
+
+    # for index, val in enumerate(primary_list):
+    #     if val < secondary_list[index]:
+    #         primary_list.insert(index, secondary_list.pop(sl_index))
+    #         sl_index += 1
+    #
+    # return primary_list + secondary_list
+
+    # return merged_list
 
     # TODO: Repeat until one list is empty
     # TODO: Find minimum item in both lists and append it to new list
@@ -63,3 +88,9 @@ def quick_sort(items, low=None, high=None):
     # TODO: Check if list or range is so small it's already sorted (base case)
     # TODO: Partition items in-place around a pivot and get index of pivot
     # TODO: Sort each sublist range by recursively calling quick sort
+
+
+if __name__ == "__main__":
+    list_1 = sorted([3,1,4,7,9])
+    list_2 = sorted([2,6,5,4])
+    print(merge(list_1,list_2))
