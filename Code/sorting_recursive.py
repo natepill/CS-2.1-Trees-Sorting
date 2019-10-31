@@ -72,20 +72,44 @@ def partition(items, low, high):
     TODO: Running time: ??? Why and under what conditions?
     TODO: Memory usage: ??? Why and under what conditions?"""
 
-    low_index, high_index = 0, len(items)-1
-    pivot = items[low_index]
+    # low index starts at 1 because pivot is init at index 0
+    low_index, high_index = low+1, high-1
+    pivot = items[low]
 
     # increment low_index until you find value greater than pivot
     # decrement high_index until you find value less than pivot
     # Swap the values at these indicies
 
     while low_index < high_index:
-        while items[low_index] > pivot
 
-        elif items[high_index] < pivot:
-            items
+        # increment low_index until you find value greater than pivot
+        while items[low_index] < pivot:
+            # print("increment low_index until you find value greater than pivot")
+            # print("low_index:", low_index)
+            # print("high_index:", high_index)
+            # print("increment")
+            low_index += 1
 
-    items[low_index], items[high_index] = items[high_index], items[low_index]
+        # decrement high_index until you find value less than pivot
+        while items[high_index] > pivot:
+            # print("decrement high_index until you find value less than pivot")
+            # print("low_index:", low_index)
+            # print("high_index:", high_index)
+            # print("decrement")
+            high_index -= 1
+
+        # print("Swap!")
+        # Swap values
+        items[low_index], items[high_index] = items[high_index], items[low_index]
+        low_index += 1
+        high_index -= 1
+
+    # print("Swap pivot with high_index")
+    # Swap value at high index with pivot, indicating partioned array
+    items[low], items[high_index] = items[high_index], pivot
+
+    return high_index
+
 
     # TODO: Choose a pivot any way and document your method in docstring above
     # TODO: Loop through all items in range [low...high]
@@ -113,7 +137,11 @@ if __name__ == "__main__":
     # l2 = [1,2,3]
 
     # list_1, list_2 = [3,1,4,7,9], [2,6,5,4]
-    single_list = [3,1,4,7,9,2,6,5,4]
-    print(split_sort_merge(single_list))
+    # single_list = [3,1,4,7,9,2,6,5,4]
+    # [3,1,4,7,9]
+    single_list = [6,7,9,1,3]
+    print(partition(single_list, 0, 5))
+    print(single_list)
+    # print(split_sort_merge(single_list))
     # print(merge(list_1,list_2))
     # print(merge(l1,l2))
