@@ -4,9 +4,8 @@
 def merge(items1, items2):
     """Merge given lists of items, each assumed to already be in sorted order,
     and return a new list containing all items in sorted order.
-    TODO: Running time: ??? Why and under what conditions?
-    TODO: Memory usage: ??? Why and under what conditions?"""
-
+    TODO: Running time: O(n+m) Have to iterate over each element in both lists. All conditions
+    TODO: O(n+m) Append all values in both lists to a single list"""
 
     merged_list = []
 
@@ -16,26 +15,20 @@ def merge(items1, items2):
     sl_index = 0
     print(f"Primary List: {primary_list}")
     print(f"Secondary List: {secondary_list}")
-    while sl_index < len(primary_list)-1:
-        print("Here")
-        if primary_list[pl_index] <= secondary_list[sl_index]:
+    # while len(merged_list) != len(primary_list) + len(secondary_list):
+    while sl_index < len(secondary_list) and pl_index < len(primary_list):
+        print(merged_list)
+        if primary_list[pl_index] < secondary_list[sl_index]:
             merged_list.append(primary_list[pl_index])
             pl_index += 1
         else:
             merged_list.append(secondary_list[sl_index])
             sl_index += 1
 
-    return merged_list + primary_list
 
+# + primary_list[pl_index:] + secondary_list[sl_index:]
+    return merged_list + primary_list[pl_index:] + secondary_list[sl_index:]
 
-    # for index, val in enumerate(primary_list):
-    #     if val < secondary_list[index]:
-    #         primary_list.insert(index, secondary_list.pop(sl_index))
-    #         sl_index += 1
-    #
-    # return primary_list + secondary_list
-
-    # return merged_list
 
     # TODO: Repeat until one list is empty
     # TODO: Find minimum item in both lists and append it to new list
@@ -48,6 +41,11 @@ def split_sort_merge(items):
     a list in sorted order.
     TODO: Running time: ??? Why and under what conditions?
     TODO: Memory usage: ??? Why and under what conditions?"""
+    list1, list2 = items[0:len(items)//2], items[len(items)//2:]
+    print(list1)
+    print(list2)
+    return merge(sorted(list1),sorted(list2))
+
     # TODO: Split items list into approximately equal halves
     # TODO: Sort each half using any other sorting algorithm
     # TODO: Merge sorted halves into one list in sorted order
@@ -91,6 +89,13 @@ def quick_sort(items, low=None, high=None):
 
 
 if __name__ == "__main__":
-    list_1 = sorted([3,1,4,7,9])
-    list_2 = sorted([2,6,5,4])
-    print(merge(list_1,list_2))
+    # list_1 = sorted([3,1,4,7,9])
+    # list_2 = sorted([2,6,5,4])
+    # l1 = [1,1,1,1]
+    # l2 = [1,2,3]
+
+    # list_1, list_2 = [3,1,4,7,9], [2,6,5,4]
+    single_list = [3,1,4,7,9,2,6,5,4]
+    print(split_sort_merge(single_list))
+    # print(merge(list_1,list_2))
+    # print(merge(l1,l2))
