@@ -1,5 +1,5 @@
 #!python
-
+from sorting_iterative import selection_sort
 
 def merge(items1, items2):
     """Merge given lists of items, each assumed to already be in sorted order,
@@ -44,7 +44,9 @@ def split_sort_merge(items):
     list1, list2 = items[0:len(items)//2], items[len(items)//2:]
     print(list1)
     print(list2)
-    return merge(sorted(list1),sorted(list2))
+    selection_sort(list1)
+    selection_sort(list2)
+    return merge(list1, list2)
 
     # TODO: Split items list into approximately equal halves
     # TODO: Sort each half using any other sorting algorithm
@@ -69,6 +71,22 @@ def partition(items, low, high):
     `[low...p-1]`, and items greater than pivot into range `[p+1...high]`.
     TODO: Running time: ??? Why and under what conditions?
     TODO: Memory usage: ??? Why and under what conditions?"""
+
+    low_index, high_index = 0, len(items)-1
+    pivot = items[low_index]
+
+    # increment low_index until you find value greater than pivot
+    # decrement high_index until you find value less than pivot
+    # Swap the values at these indicies
+
+    while low_index < high_index:
+        while items[low_index] > pivot
+
+        elif items[high_index] < pivot:
+            items
+
+    items[low_index], items[high_index] = items[high_index], items[low_index]
+
     # TODO: Choose a pivot any way and document your method in docstring above
     # TODO: Loop through all items in range [low...high]
     # TODO: Move items less than pivot into front of range [low...p-1]
