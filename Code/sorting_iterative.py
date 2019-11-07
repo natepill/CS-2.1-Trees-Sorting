@@ -20,21 +20,6 @@ def is_sorted(items):
 
     return True
 
-    # Frist Version
-    # prev_values = []
-    #
-    # # Check to see if current value is greater than priors values, if not, then list is not sorted
-    # for value in items:
-    #     for prev_value in prev_values:
-    #         if value < prev_value:
-    #             return False
-    #
-    #     # current values sorted correctly so far
-    #     prev_values.append(value)
-    #
-    # # list is sorted
-    # return True
-
     # TODO: Check that all adjacent items are in order, return early if so
 
 
@@ -138,22 +123,12 @@ def insertion_sort(items):
             items.insert(0, items[index])
 
 
-        # while index > 0 or items[index-1] > items[index]:
-        #     if items[index] < items[insert_index]:
-        #         index -= 1
-
-        #
-        # insert_index = index-1
-        # # Keep comparing until reached begining of list
-        # while index > 0:
-        #
-        #     if items[index] < items[insert_index]:
 
 
     # TODO: Repeat until all items are in sorted order
     # TODO: Take first unsorted item
     # TODO: Insert it in sorted order in front of items
-    pass
+
 
 
 if __name__ == "__main__":
