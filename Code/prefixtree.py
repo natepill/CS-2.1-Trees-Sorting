@@ -36,14 +36,41 @@ class PrefixTree:
     def is_empty(self):
         """Return True if this prefix tree is empty (contains no strings)."""
         # TODO
+        return True if self.num_children() < 1 else False
 
     def contains(self, string):
         """Return True if this prefix tree contains the given string."""
-        # TODO
+
+        curr_node = self.root
+        index = 0
+
+        for char in string:
+            if char in curr_node.children:
+                curr_node = curr_node.children[char]
+            else:
+                return False
+
+        # Ensure String's last node is terminal
+        if curr_node.terminal == True:
+            return True
+        else:
+            return False
+
 
     def insert(self, string):
         """Insert the given string into this prefix tree."""
-        # TODO
+        curr_node = self.root
+        for char in string:
+            # character exists
+            if char in curr_node.children:
+                curr_node = curr_node.children[char]
+            # Add a new character node
+            else:
+                new_node = PrefixTreeNode(char)
+                curr_node.add_child(char, new_node)
+                curr_node = curr_node.children[char]
+
+        curr_node.terminal = True
 
     def _find_node(self, string):
         """Return a tuple containing the node that terminates the given string
