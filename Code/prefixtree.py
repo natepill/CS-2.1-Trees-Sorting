@@ -77,30 +77,69 @@ class PrefixTree:
         in this prefix tree and the node's depth, or if the given string is not
         completely found, return None and the depth of the last matching node.
         Search is done iteratively with a loop starting from the root node."""
+
         # Match the empty string
         if len(string) == 0:
             return self.root, 0
-        # Start with the root node
-        node = self.root
-        # TODO
+
+        curr_node = self.root
+
+        # tracking depth of traversal to node
+        depth = 0
+
+        for char in string:
+            if char in curr_node.children:
+                curr_node = curr_node.children[char]
+                depth += 1
+            else:
+                return None, depth
+
+        return curr_node, depth
+
+
 
     def complete(self, prefix):
         """Return a list of all strings stored in this prefix tree that start
         with the given prefix string."""
         # Create a list of completions in prefix tree
         completions = []
-        # TODO
+
+        # Traverse the subtree from the given prefix
+            # if the node is terminal then append to completions
+
+        start_node = self._find_node(prefix)
+
+        if start_node == None:
+            return completions
+
+        for char,node in start_node.children.items():
+
+            self._traverse(start_node, prefix, completions.append)
+
+        return completions
 
     def strings(self):
         """Return a list of all strings stored in this prefix tree."""
         # Create a list of all strings in prefix tree
         all_strings = []
-        # TODO
+
+        curr_node = self.root
+
+        for char,node in curr_node.children.items():
+            if node is not None:
+                print(node.character)
+
 
     def _traverse(self, node, prefix, visit):
         """Traverse this prefix tree with recursive depth-first traversal.
         Start at the given node and visit each node with the given function."""
-        # TODO
+
+        for char,node_ref in node.children.items():
+
+            if node_ref.terminal:
+                visit(node_ref)
+
+            self._traverse(node_ref, prefix+char, visit)
 
 
 def create_prefix_tree(strings):
@@ -145,7 +184,15 @@ def create_prefix_tree(strings):
 
 
 if __name__ == '__main__':
-    # Create a dictionary of tongue-twisters with similar words to test with
+    tree = PrefixTree()
+    # Insert new string that starts from root node
+    tree.insert('ABC')
+    tree.insert('BAC')
+    tree.insert('CAB')
+
+    print(tree._find_node('CAB'))
+
+    # # Create a dictionary of tongue-twisters with similar words to test with
     tongue_twisters = {
         'Seashells': 'Shelly sells seashells by the sea shore'.split(),
         # 'Peppers': 'Peter Piper picked a peck of pickled peppers'.split(),

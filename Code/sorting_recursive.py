@@ -93,7 +93,7 @@ def partition(items, low, high):
     TODO: Memory usage: O(1) no new memory allocated other than variables"""
 
     # low index starts at 1 because pivot is init at index 0
-    low_index, high_index = low+1, high-1
+    low_index, high_index = low, high
     pivot = items[low]
 
     # increment low_index until you find value greater than pivot
@@ -147,16 +147,17 @@ def quick_sort(items, low=None, high=None):
 
     # When a sublist is just one element, then that sublist is already sorted
 
-    if len(items) == 1:
-        return items
+    if low is None and high is None:
+        low = 0
+        high = len(items)-1
 
-    pivot_index = partition(items, low, high)
-    list1, list2 = items[0:pivot_index], items[pivot_index:]
-    quick_sort(list1, low+1, len(list1)-1)
-    quick_sort(list2, low+1, len(list2)-1)
-
-
-
+    if low < high:
+        # get the pivot index
+        pivot_index = partition(items, low, high)
+        # left half of the list to be sorted
+        quick_sort(items, low, pivot_index - 1)
+        # right half of the list to be sorted
+        quick_sort(items, pivot_index + 1, high)
 
 
 
@@ -174,15 +175,16 @@ if __name__ == "__main__":
     # print(merge(list_1, list_2))
 
     # list_1, list_2 = [3,1,4,7,9], [2,6,5,4]
-    # single_list = [3,1,4,7,9,2,6,5,4]
+    single_list = [3,1,4,7,9,2,6,5,4]
     # [3,1,4,7,9]
-    single_list = [6,7,9,1,3]
-    print(merge_sort(single_list))
+    # single_list = [6,7,9,1,3]
+    # print(merge_sort(single_list))
     # print(single_list)
 
     # print(partition(single_list, 0, 5))
     # print(single_list)
-    # print(quick_sort(single_list, 0, len(single_list)-1))
+    quick_sort(single_list,0,len(single_list)-1)
+    print(single_list)
     # print(split_sort_merge(single_list))
     # print(merge(list_1,list_2))
     # print(merge(l1,l2))
