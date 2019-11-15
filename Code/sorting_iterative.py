@@ -100,29 +100,32 @@ def selection_sort(items):
 
 
 def insertion_sort(items):
-    """Sort given items by taking first unsorted item, inserting it in sorted
-    order in front of items, and repeating until all items are in order.
-    TODO: Running time: ??? Why and under what conditions?
-    TODO: Memory usage: ??? Why and under what conditions?"""
+    """
+        Sort given items by taking first unsorted item, inserting it in sorted
+        order in front of items, and repeating until all items are in order.
+        Running time: Worst case O(n^2),
+        Best case O(n) on a sorted list
+        Memory usage: O(1) for variable assignment
+    """
 
-    # iterate over range of indicies
+    swaps = 0
+    # iterating indicies backwards
+    for i in range(1, len(items)):
 
-    # compare the value of current index with preceding values at prior indicies
-    # insert current value at index whose value is smaller than current value
-
-    # Skip first index in index iteration range because first value is "sorted"
-    for index in range(1, len(items)):
-        # Iterate over preceding indicies
-        for prev_index in range(index, -1, -1):
-            # Point of insertion
-            if items[index] > items[prev_index]:
-                items.insert(index, items[index])
-
-        # No more values to compare to, so current value is the smallest value seen so far
-        if items[index] < items[0]:
-            items.insert(0, items[index])
+        for j in range(i-1, -1, -1):
+            # value swap
+            if items[j] > items[j+1]:
+                items[j], items[j+1] = items[j+1], items[j]
+                swaps += 1
+            else:
+                break
 
 
+    if reversed:
+        items = items[::-1]
+        return items
+
+    return items
 
 
     # TODO: Repeat until all items are in sorted order
@@ -136,6 +139,6 @@ if __name__ == "__main__":
     # items = [1,2,3,4]
     items = [1, 2, 3, 1, 2, 5]
     print(is_sorted(items))
-    selection_sort(items)
+    insertion_sort(items)
     print(is_sorted(items))
     print(items)
