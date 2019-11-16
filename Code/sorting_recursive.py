@@ -39,8 +39,10 @@ def split_sort_merge(items):
     """Sort given items by splitting list into two approximately equal halves,
     sorting each with an iterative sorting algorithm, and merging results into
     a list in sorted order.
-    TODO: Running time: ??? Why and under what conditions?
-    TODO: Memory usage: ??? Why and under what conditions?"""
+     Running time: O(N^2) running time
+        Memory usage: O(N), because we are creating a new list when we merge the two sublists
+        that are equal size to N (M+M = N)
+    """
     list1, list2 = items[0:len(items)//2], items[len(items)//2:]
     print(list1)
     print(list2)
@@ -120,9 +122,13 @@ def partition(arr,low,high):
 def quick_sort(items, low=None, high=None):
     """Sort given items in place by partitioning items in range `[low...high]`
     around a pivot item and recursively sorting each remaining sublist range.
-    TODO: Best case running time: ??? Why and under what conditions?
-    TODO: Worst case running time: ??? Why and under what conditions?
-    TODO: Memory usage: ??? Why and under what conditions?"""
+
+    Best and average case running time: O(nlogn) when two halves of the list
+    partitioned equally due to well picked pivot near the median of the list
+
+    Worst case running time: O(n^2) When the pivot is picked far from the median resulting if __name__ == '__main__':
+        bad splits
+    TODO: O(1) because everything is done inplace """
 
     # When a sublist is just one element, then that sublist is already sorted
 
