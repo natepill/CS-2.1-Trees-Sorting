@@ -54,10 +54,12 @@ def split_sort_merge(items):
 
 
 def merge_sort(items):
-    """Sort given items by splitting list into two approximately equal halves,
-    sorting each recursively, and merging results into a list in sorted order.
-    TODO: Running time: ??? Why and under what conditions?
-    TODO: Memory usage: ??? Why and under what conditions?"""
+    """
+        Running time: O(n+m) where n and m are lengths of two sorted lists
+        Memory usage: O(n+m) where n and m are lengths of two sorted lists,
+        Runnning and memory time is the same for all cases, because we always copy
+        all elements from both lists to new merged list.
+    """
 
     if len(items) == 1:
         return
@@ -84,51 +86,28 @@ def merge_sort(items):
     # TODO: Merge sorted halves into one list in sorted order
 
 
-def partition(items, low, high):
-    """Return index `p` after in-place partitioning given items in range
-    `[low...high]` by choosing a pivot (TODO: document your method here) from
-    that range, moving pivot into index `p`, items less than pivot into range
-    `[low...p-1]`, and items greater than pivot into range `[p+1...high]`.
-    TODO: Running time: O(n-m) Iterate over given range in items. n being items m being length of range
-    TODO: Memory usage: O(1) no new memory allocated other than variables"""
 
-    # low index starts at 1 because pivot is init at index 0
-    low_index, high_index = low, high
-    pivot = items[low]
+def partition(arr,low,high):
 
-    # increment low_index until you find value greater than pivot
-    # decrement high_index until you find value less than pivot
-    # Swap the values at these indicies
+    # track index of smaller value
+    i = low-1
+    pivot = arr[high]
 
-    while low_index < high_index:
+    for j in range(low , high):
 
-        # increment low_index until you find value greater than pivot
-        while items[low_index] < pivot:
-            # print("increment low_index until you find value greater than pivot")
-            # print("low_index:", low_index)
-            # print("high_index:", high_index)
-            # print("increment")
-            low_index += 1
+        # If current value is smaller than or eqaul to pivot
+        if arr[j] <= pivot:
 
-        # decrement high_index until you find value less than pivot
-        while items[high_index] > pivot:
-            # print("decrement high_index until you find value less than pivot")
-            # print("low_index:", low_index)
-            # print("high_index:", high_index)
-            # print("decrement")
-            high_index -= 1
+            # increment index of smaller value
+            i = i+1
+            arr[i],arr[j] = arr[j],arr[i]
 
-        # print("Swap!")
-        # Swap values
-        items[low_index], items[high_index] = items[high_index], items[low_index]
-        low_index += 1
-        high_index -= 1
+    arr[i+1],arr[high] = arr[high],arr[i+1]
+    return i+1
 
-    # print("Swap pivot with high_index")
-    # Swap value at high index with pivot, indicating partioned array
-    items[low], items[high_index] = items[high_index], pivot
 
-    return high_index
+
+
 
 
     # TODO: Choose a pivot any way and document your method in docstring above
