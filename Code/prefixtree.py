@@ -36,7 +36,10 @@ class PrefixTree:
     def is_empty(self):
         """Return True if this prefix tree is empty (contains no strings)."""
         # TODO
-        return True if self.num_children() < 1 else False
+        # return self.size == 0
+        return self.size == 0
+
+        # return True if self.root.num_children() < 1 else False
 
     def contains(self, string):
         """Return True if this prefix tree contains the given string."""
@@ -59,18 +62,29 @@ class PrefixTree:
 
     def insert(self, string):
         """Insert the given string into this prefix tree."""
-        curr_node = self.root
-        for char in string:
-            # character exists
-            if char in curr_node.children:
-                curr_node = curr_node.children[char]
-            # Add a new character node
-            else:
-                new_node = PrefixTreeNode(char)
-                curr_node.add_child(char, new_node)
-                curr_node = curr_node.children[char]
 
-        curr_node.terminal = True
+        if not self.contains(string):
+
+            curr_node = self.root
+
+
+            for char in string:
+                # character exists
+                if char in curr_node.children:
+                    curr_node = curr_node.children[char]
+                # Add a new character node
+                else:
+                    new_node = PrefixTreeNode(char)
+                    curr_node.add_child(char, new_node)
+                    curr_node = curr_node.children[char]
+
+
+            curr_node.terminal = True
+
+            self.size += 1
+
+        else:
+            print(f"{string} already exists in the Tree!")
 
     def _find_node(self, string):
         """Return a tuple containing the node that terminates the given string
@@ -98,7 +112,7 @@ class PrefixTree:
 
 
 
-    def complete(self, prefix):
+    def complete(self, prefix=''):
         """Return a list of all strings stored in this prefix tree that start
         with the given prefix string."""
         # Create a list of completions in prefix tree
@@ -107,12 +121,12 @@ class PrefixTree:
         # Traverse the subtree from the given prefix
             # if the node is terminal then append to completions
 
-        start_node = self._find_node(prefix)
+        start_node, _ = self._find_node(prefix)
 
         if start_node == None:
             return completions
 
-        for char,node in start_node.children.items():
+        if not self.is_empty():
 
             self._traverse(start_node, prefix, completions.append)
 
@@ -120,26 +134,31 @@ class PrefixTree:
 
     def strings(self):
         """Return a list of all strings stored in this prefix tree."""
-        # Create a list of all strings in prefix tree
-        all_strings = []
+        # # Create a list of all strings in prefix tree
+        # all_strings = []
+        #
+        # # iterate over all possible starting characters
+        # for char,node in self.root.children.items():
+        #     # append all values in the collections of completed words
+        #     for completed_word in self.complete(char):
+        #         all_strings.append(completed_word)
+        #
+        # return all_strings
 
-        curr_node = self.root
-
-        for char,node in curr_node.children.items():
-            if node is not None:
-                print(node.character)
-
+        return self.complete()
 
     def _traverse(self, node, prefix, visit):
         """Traverse this prefix tree with recursive depth-first traversal.
         Start at the given node and visit each node with the given function."""
 
-        for char,node_ref in node.children.items():
+        if node.terminal:
+            visit(prefix)
 
-            if node_ref.terminal:
-                visit(node_ref)
+        # print("node.children:", node.children)
+        for char, child in node.children.items():
 
-            self._traverse(node_ref, prefix+char, visit)
+            self._traverse(child, prefix+char, visit)
+
 
 
 def create_prefix_tree(strings):
@@ -179,8 +198,8 @@ def create_prefix_tree(strings):
     print('\nRetrieving all strings:')
     retrieved_strings = tree.strings()
     print(f'strings: {retrieved_strings}')
-    matches = set(retrieved_strings) == set(strings)
-    print(f'matches? {matches}')
+    # matches = set(retrieved_strings) == set(strings)
+    # print(f'matches? {matches}')
 
 
 if __name__ == '__main__':

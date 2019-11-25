@@ -6,21 +6,19 @@ def is_sorted(items):
     TODO: Running time: O(n) Iterating over given list (n), just incrementing indicies and comparing values
     TODO: Memory usage: O(1) No extra space allocated expect for some variables that are being incremented"""
 
-    index_1 = 0
-    index_2 = 1
+    if len(items) < 1:
+        return True
 
-    while index_2 < len(items)-1:
-        # out of order
-        if items[index_2] < items[index_1]:
+    index = 0
+
+    while index < len(items)-1:
+        # print(items[index])
+        if items[index] > items[index+1]:
             return False
-        # currently in order
-        else:
-            index_1 += 1
-            index_2 += 1
+
+        index += 1
 
     return True
-
-    # TODO: Check that all adjacent items are in order, return early if so
 
 
 
@@ -31,6 +29,9 @@ def bubble_sort(items):
     times for (n) values in the list. Additional O(n) to check if sorted
     TODO: Memory usage: O(1) because we just allocated memory for a couple variables"""
 
+    if len(items) == 0:
+        return None
+        
     index_1 = 0
     index_2 = 1
 
@@ -40,14 +41,12 @@ def bubble_sort(items):
     while is_sorted(items) == False:
         # print("Still not sorted")
 
-        while index_2 < len(items)-1:
+        while index_2 < len(items):
 
             # if first val is greater than second val:
                 #swap the values
             if items[index_1] > items[index_2]: # O(1)
-                temp  = items[index_1]
-                items[index_1] = items[index_2]
-                items[index_2] = temp
+                items[index_1], items[index_2] = items[index_2], items[index_1]
 
             # comparing next 2 values in the list
             index_1 += 1
@@ -67,6 +66,7 @@ def selection_sort(items):
     Running time: O(n*m) Best case O(n) with only a few swaps, but could be O(n^2) if values
     at every position need to be swapped
     Memory usage: O(1) Not really allocating much memory besides for variables """
+
 
     # init curr_index
     # init swap_index, value
@@ -137,8 +137,14 @@ def insertion_sort(items):
 if __name__ == "__main__":
     # items = [1,3,2,1]
     # items = [1,2,3,4]
-    items = [1, 2, 3, 1, 2, 5]
-    print(is_sorted(items))
-    insertion_sort(items)
+    # items = [1, 2, 3, 1, 2, 5]
+    items = [5, 3]
+    # print(items)
+
+    bubble_sort(items)
     print(is_sorted(items))
     print(items)
+    # print(is_sorted(items))
+    # insertion_sort(items)
+    # print(is_sorted(items))
+    # print(items)
