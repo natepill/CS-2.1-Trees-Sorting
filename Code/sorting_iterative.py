@@ -6,7 +6,7 @@ def is_sorted(items):
     TODO: Running time: O(n) Iterating over given list (n), just incrementing indicies and comparing values
     TODO: Memory usage: O(1) No extra space allocated expect for some variables that are being incremented"""
 
-    if len(items) < 1:
+    if len(items) <= 1:
         return True
 
     index = 0
@@ -29,9 +29,10 @@ def bubble_sort(items):
     times for (n) values in the list. Additional O(n) to check if sorted
     TODO: Memory usage: O(1) because we just allocated memory for a couple variables"""
 
-    if len(items) == 0:
-        return None
-        
+    if len(items) <= 1:
+        return items
+
+
     index_1 = 0
     index_2 = 1
 
@@ -141,10 +142,11 @@ if __name__ == "__main__":
     items = [5, 3]
     # print(items)
 
-    bubble_sort(items)
-    print(is_sorted(items))
-    print(items)
-    # print(is_sorted(items))
-    # insertion_sort(items)
+    # bubble_sort(items)
     # print(is_sorted(items))
     # print(items)
+    # print(is_sorted(items))
+    insertion_sort(items)
+
+    print(items)
+    # print(is_sorted(items))
