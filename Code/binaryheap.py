@@ -21,8 +21,11 @@ class BinaryMinHeap(object):
 
     def is_empty(self):
         """Return True if this heap is empty, or False otherwise."""
-        # TODO: Check if empty based on how many items are in the list
-        # ...
+        if len(self.items) == 0:
+            return True
+        else:
+            return False
+
 
     def size(self):
         """Return the number of items in this heap."""
@@ -116,7 +119,7 @@ class BinaryMinHeap(object):
         # Get the index of the item's left and right children
         left_index = self._left_child_index(index)
         right_index = self._right_child_index(index)
-        
+
         if left_index > self._last_index() or right_index >= self.size():
             return  # This index is a leaf node (does not have any children)
 
