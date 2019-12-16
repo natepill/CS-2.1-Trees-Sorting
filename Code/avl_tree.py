@@ -126,18 +126,6 @@ class AVLTree:
             nodes_list.append(i)
         return nodes_list
 
-    def print_tree_as_tree_shape(self, node=None, level=0):
-        if not node:
-            node = self.node
-
-        if node.right.node:
-            self.print_tree_as_tree_shape(node.right.node, level + 1)
-            print(('\t' * level), (' / '))
-        print(('\t' * level), node.key)
-
-        if node.left.node:
-            print(('\t' * level), (' \\ '))
-            self.print_tree_as_tree_shape(node.left.node, level + 1)
 
 
 def create_random_node_list(n=10):
@@ -156,6 +144,5 @@ def create_avl_tree(node_list):
 
 if __name__ == "__main__":
     avl = create_avl_tree(create_random_node_list(8))
-    avl.print_tree_as_tree_shape()
-    print('\n')
+
     print(avl.tree_in_order_traversal())
