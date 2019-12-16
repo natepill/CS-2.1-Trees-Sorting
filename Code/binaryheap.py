@@ -59,8 +59,8 @@ class BinaryMinHeap(object):
         """
             Remove and return the minimum item at the root of this heap.
             Best case running time: O(1) if the new root is smallest value
-            Worst case running time: O(log(n)) -> when if we new root is greater
-            than its children nodes
+            Worst case running time: O(log(n)) if we new root is greater
+            than its children
         """
         if self.size() == 0:
             raise ValueError('Heap is empty and has no minimum item')
@@ -69,11 +69,12 @@ class BinaryMinHeap(object):
             return self.items.pop()
         assert self.size() > 1
         min_item = self.items[0]
-        # Move the last item to the root and bubble down to the leaves
+
         last_item = self.items.pop()
         self.items[0] = last_item
         if self.size() > 1:
             self._bubble_down(0)
+            
         return min_item
 
     def replace_min(self, item):
